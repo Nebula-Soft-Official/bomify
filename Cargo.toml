@@ -1,0 +1,9 @@
+[package]
+name = "bomify"
+version = "0.1.0"
+edition = "2021"
+description = "ファイルに BOM を追加するツールである。"
+readme = 'README.md'
+license = "MIT"
+
+[dependencies]
