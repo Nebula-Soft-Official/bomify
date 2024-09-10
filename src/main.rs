@@ -1,6 +1,6 @@
 use std::{
     fs::{self, File, OpenOptions},
-    io::{Read, Result, Write},
+    io::{self, Read, Result, Write},
     path::Path,
 };
 
@@ -15,6 +15,7 @@ const BOM: &[u8] = b"\xEF\xBB\xBF";
 fn main() -> Result<()> {
     let root = Path::new(ROOT_DIRECTORY);
     traverse_directory(root)?;
+    wait_for_read_log()?;
     Ok(())
 }
 
@@ -73,5 +74,11 @@ fn add_bom_to_file(path: &Path) -> Result<()> {
         .write_all(&new_content)?;
 
     println!("[{}] に BOM を追加しました。", unix_style_path);
+    Ok(())
+}
+
+fn wait_for_read_log() -> Result<()> {
+    println!("任意の鍵を押下して閉じる...");
+    io::stdin().read_line(&mut String::new())?;
     Ok(())
 }
